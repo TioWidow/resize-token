@@ -6,9 +6,12 @@ Hooks.on("renderTokenHUD", (app, htmlElement, data) => {
   // Evita adicionar o botão múltiplas vezes
   if (html.find(`.control-icon[data-action="${MODULE_ID}"]`).length > 0) return;
 
+  // Tooltip traduzido
+  const tooltip = game.i18n.localize(`${MODULE_ID}.tooltip`);
+
   // Cria o botão
   const button = $(`
-    <div class="control-icon" data-action="${MODULE_ID}" title="Redimensionar Token">
+    <div class="control-icon" data-action="${MODULE_ID}" title="${tooltip}">
       <i class="fas fa-expand-arrows-alt"></i>
     </div>
   `);
@@ -26,30 +29,29 @@ Hooks.on("renderTokenHUD", (app, htmlElement, data) => {
 });
 
 function showResizeDialog(token) {
-  // Exemplo de diálogo simples com três tamanhos
   new Dialog({
-    title: "Redimensionar Token",
+    title: game.i18n.localize(`${MODULE_ID}.dialog.title`),
     content: `
-      <p>Escolha o tamanho do token:</p>
+      <p>${game.i18n.localize(`${MODULE_ID}.dialog.content`)}</p>
       <div class="form-group">
-        <label>Tamanho:</label>
+        <label>${game.i18n.localize(`${MODULE_ID}.dialog.label`)}</label>
         <select id="resize-token-size">
-          <option value="1">Pequeno (1x1)</option>
-          <option value="2">Médio (2x2)</option>
-          <option value="3">Grande (3x3)</option>
+          <option value="1">${game.i18n.localize(`${MODULE_ID}.sizes.small`)}</option>
+          <option value="2">${game.i18n.localize(`${MODULE_ID}.sizes.medium`)}</option>
+          <option value="3">${game.i18n.localize(`${MODULE_ID}.sizes.large`)}</option>
         </select>
       </div>
     `,
     buttons: {
       ok: {
-        label: "Aplicar",
+        label: game.i18n.localize(`${MODULE_ID}.dialog.ok`),
         callback: html => {
           const size = parseInt(html.find("#resize-token-size").val());
           token.document.update({ width: size, height: size });
         }
       },
       cancel: {
-        label: "Cancelar"
+        label: game.i18n.localize(`${MODULE_ID}.dialog.cancel`)
       }
     },
     default: "ok"
