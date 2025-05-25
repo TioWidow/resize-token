@@ -1,41 +1,43 @@
 Hooks.on('ready', () => {
     console.log("Resize Token Module | Loaded");
 
-    // Hook para mostrar botão quando um token for controlado
     Hooks.on("controlToken", (token, controlled) => {
-        if (!controlled) return;
-        addResizeButton(token);
+        if (controlled) {
+            addResizeButtonToHUD(token);
+        }
     });
 });
 
-function addResizeButton(token) {
-    // Evita adicionar múltiplos botões
-    if (document.getElementById(`resize-btn-${token.id}`)) return;
+function addResizeButtonToHUD(token) {
+    const hud = token._object?.hud || token._hud || token.layer.hud;
+    if (!hud) return;
+
+    // Evita duplicar botão
+    const existing = document.getElementById(`resize-btn-${token.id}`);
+    if (existing) existing.remove();
 
     const button = document.createElement("div");
     button.id = `resize-btn-${token.id}`;
-    button.classList.add("resize-token-btn");
     button.innerHTML = "📏";
+    button.title = "Redimensionar Token";
     button.style.position = "absolute";
-    button.style.left = `${token.center.x + 20}px`;
-    button.style.top = `${token.center.y - 40}px`;
-    button.style.zIndex = 100;
+    button.style.left = "0px";
+    button.style.top = "-40px";
     button.style.fontSize = "20px";
     button.style.cursor = "pointer";
     button.style.background = "rgba(0,0,0,0.7)";
     button.style.color = "white";
     button.style.padding = "2px 6px";
     button.style.borderRadius = "4px";
+    button.style.zIndex = 999;
 
-    button.addEventListener("click", () => showResizeDialog(token));
-    document.body.appendChild(button);
+    button.onclick = () => showResizeDialog(token);
 
-    // Remove botão ao desmarcar o token
-    Hooks.once("controlToken", (token, controlled) => {
-        if (!controlled) {
-            button.remove();
-        }
-    });
+    // Insere no HUD do token
+    const controlIcon = hud.element.find(".control-icon")[0];
+    if (controlIcon) {
+        controlIcon.appendChild(button);
+    }
 }
 
 function showResizeDialog(token) {
