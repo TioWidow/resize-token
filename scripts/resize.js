@@ -1,70 +1,63 @@
-Hooks.on('ready', () => {
-    console.log("Resize Token Module | Loaded");
+const MODULE_ID = "resize-token-tw";
 
-    Hooks.on("controlToken", (token, controlled) => {
-        if (controlled) {
-            addResizeButtonToHUD(token);
-        }
-    });
+Hooks.on("renderTokenHUD", (app, html, data) => {
+  // Evita adicionar o botão múltiplas vezes
+  if (html.find(`.control-icon[data-action="${MODULE_ID}"]`).length > 0) return;
+
+  // Cria o botão
+  const button = $(`
+    <div class="control-icon" data-action="${MODULE_ID}" title="Redimensionar Token">
+      <i class="fas fa-expand-arrows-alt"></i>
+    </div>
+  `);
+
+  // Adiciona ao HUD na coluna da direita
+  const rightCol = html.find(".col.right");
+  if (rightCol.length > 0) {
+    rightCol.append(button);
+  }
+
+  // Evento de clique
+  button.on("click", () => {
+    showResizeDialog();
+  });
 });
 
-function addResizeButtonToHUD(token) {
-    const hud = token._object?.hud || token._hud || token.layer.hud;
-    if (!hud) return;
+async function showResizeDialog() {
+  const transformations = {
+    Tiny: { label: 'Tiny', scale: 0.25 },
+    Small: { label: 'Small', scale: 0.5 },
+    Medium: { label: 'Medium', scale: 1 },
+    Large: { label: 'Large', scale: 2 },
+    Huge: { label: 'Huge', scale: 3 }
+  };
 
-    // Evita duplicar botão
-    const existing = document.getElementById(`resize-btn-${token.id}`);
-    if (existing) existing.remove();
+  if (canvas.tokens.controlled.length === 0) {
+    ui.notifications.warn("Selecione um token primeiro.");
+    return;
+  }
 
-    const button = document.createElement("div");
-    button.id = `resize-btn-${token.id}`;
-    button.innerHTML = "📏";
-    button.title = "Redimensionar Token";
-    button.style.position = "absolute";
-    button.style.left = "0px";
-    button.style.top = "-40px";
-    button.style.fontSize = "20px";
-    button.style.cursor = "pointer";
-    button.style.background = "rgba(0,0,0,0.7)";
-    button.style.color = "white";
-    button.style.padding = "2px 6px";
-    button.style.borderRadius = "4px";
-    button.style.zIndex = 999;
-
-    button.onclick = () => showResizeDialog(token);
-
-    // Insere no HUD do token
-    const controlIcon = hud.element.find(".control-icon")[0];
-    if (controlIcon) {
-        controlIcon.appendChild(button);
-    }
+  new Dialog({
+    title: "Redimensionar Token",
+    content: "<p>Escolha o tamanho do token:</p>",
+    buttons: Object.fromEntries(
+      Object.entries(transformations).map(([key, val]) => [
+        key,
+        {
+          label: val.label,
+          callback: () => resizeTokens(val.scale)
+        }
+      ])
+    )
+  }).render(true);
 }
 
-function showResizeDialog(token) {
-    const transformations = {
-        Tiny: { label: 'Tiny', scale: 0.25 },
-        Small: { label: 'Small', scale: 0.5 },
-        Medium: { label: 'Medium', scale: 1 },
-        Large: { label: 'Large', scale: 2 },
-        Huge: { label: 'Huge', scale: 3 }
-    };
+async function resizeTokens(scale) {
+  const updates = canvas.tokens.controlled.map(token => ({
+    _id: token.id,
+    width: scale,
+    height: scale
+  }));
 
-    new Dialog({
-        title: 'Redimensionar Token - TioWidow',
-        content: `<p>Selecione o tamanho:</p>`,
-        buttons: Object.entries(transformations).reduce((acc, [key, config]) => {
-            acc[key] = {
-                label: config.label,
-                callback: async () => {
-                    await canvas.scene.updateEmbeddedDocuments("Token", [{
-                        _id: token.id,
-                        width: config.scale,
-                        height: config.scale
-                    }]);
-                }
-            };
-            return acc;
-        }, {}),
-        close: () => {}
-    }).render(true);
+  await canvas.scene.updateEmbeddedDocuments("Token", updates);
 }

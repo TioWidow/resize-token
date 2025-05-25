@@ -6,7 +6,7 @@
   "version": "0.0.1",
   "author": "TioWidow",
   "minimumCoreVersion": "10",
-  "compatibleCoreVersion": "13",
+  "compatibleCoreVersion": "13.342",
   "scripts": ["scripts/resize.js"],
   "esmodules": [],
   "styles": ["styles/style.css"],
