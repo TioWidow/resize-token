@@ -1,6 +1,8 @@
 const MODULE_ID = "resize-token-tw";
 
-Hooks.on("renderTokenHUD", (app, html, data) => {
+Hooks.on("renderTokenHUD", (app, htmlElement, data) => {
+  const html = $(htmlElement); // Garante compatibilidade com jQuery
+
   // Evita adicionar o botão múltiplas vezes
   if (html.find(`.control-icon[data-action="${MODULE_ID}"]`).length > 0) return;
 
@@ -11,53 +13,45 @@ Hooks.on("renderTokenHUD", (app, html, data) => {
     </div>
   `);
 
-  // Adiciona ao HUD na coluna da direita
+  // Procura a coluna da direita no HUD
   const rightCol = html.find(".col.right");
   if (rightCol.length > 0) {
     rightCol.append(button);
   }
 
-  // Evento de clique
+  // Ação do botão
   button.on("click", () => {
-    showResizeDialog();
+    showResizeDialog(app.object);
   });
 });
 
-async function showResizeDialog() {
-  const transformations = {
-    Tiny: { label: 'Tiny', scale: 0.25 },
-    Small: { label: 'Small', scale: 0.5 },
-    Medium: { label: 'Medium', scale: 1 },
-    Large: { label: 'Large', scale: 2 },
-    Huge: { label: 'Huge', scale: 3 }
-  };
-
-  if (canvas.tokens.controlled.length === 0) {
-    ui.notifications.warn("Selecione um token primeiro.");
-    return;
-  }
-
+function showResizeDialog(token) {
+  // Exemplo de diálogo simples com três tamanhos
   new Dialog({
     title: "Redimensionar Token",
-    content: "<p>Escolha o tamanho do token:</p>",
-    buttons: Object.fromEntries(
-      Object.entries(transformations).map(([key, val]) => [
-        key,
-        {
-          label: val.label,
-          callback: () => resizeTokens(val.scale)
+    content: `
+      <p>Escolha o tamanho do token:</p>
+      <div class="form-group">
+        <label>Tamanho:</label>
+        <select id="resize-token-size">
+          <option value="1">Pequeno (1x1)</option>
+          <option value="2">Médio (2x2)</option>
+          <option value="3">Grande (3x3)</option>
+        </select>
+      </div>
+    `,
+    buttons: {
+      ok: {
+        label: "Aplicar",
+        callback: html => {
+          const size = parseInt(html.find("#resize-token-size").val());
+          token.document.update({ width: size, height: size });
         }
-      ])
-    )
+      },
+      cancel: {
+        label: "Cancelar"
+      }
+    },
+    default: "ok"
   }).render(true);
-}
-
-async function resizeTokens(scale) {
-  const updates = canvas.tokens.controlled.map(token => ({
-    _id: token.id,
-    width: scale,
-    height: scale
-  }));
-
-  await canvas.scene.updateEmbeddedDocuments("Token", updates);
 }

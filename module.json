@@ -3,10 +3,20 @@
   "name": "resize-token-tw",
   "title": "Resize Token",
   "description": "Adiciona botão para redimensionar tokens rapidamente.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "TioWidow",
   "minimumCoreVersion": "10",
   "compatibleCoreVersion": "13.342",
+  "compatibility": {
+    "minimum": 10,
+    "verified": 13.342
+  },
+  "authors": [
+    {
+      "name": "TioWidow",
+      "url": "https://github.com/TioWidow"
+    }
+  ],
   "scripts": ["scripts/resize.js"],
   "esmodules": [],
   "styles": ["styles/style.css"],
