@@ -3,7 +3,7 @@
   "name": "resize-token-tw",
   "title": "Resize Token",
   "description": "Adiciona botão para redimensionar tokens rapidamente.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "TioWidow",
   "minimumCoreVersion": "10",
   "compatibleCoreVersion": "13.342",
