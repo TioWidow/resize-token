@@ -1,5 +1,11 @@
 {
-  "resize-token-tw.name": "Resize Token",
-  "resize-token-tw.resize": "Resize",
-  "resize-token-tw.tooltip": "Resize the token to its default size"
+  "resize-token-tw.tooltip": "Resize Token",
+  "resize-token-tw.dialog.title": "Resize Token",
+  "resize-token-tw.dialog.content": "Choose the token size:",
+  "resize-token-tw.dialog.label": "Size:",
+  "resize-token-tw.dialog.ok": "Apply",
+  "resize-token-tw.dialog.cancel": "Cancel",
+  "resize-token-tw.sizes.small": "Small (1x1)",
+  "resize-token-tw.sizes.medium": "Medium (2x2)",
+  "resize-token-tw.sizes.large": "Large (3x3)"
 }
