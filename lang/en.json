@@ -5,7 +5,9 @@
   "resize-token-tw.dialog.label": "Size:",
   "resize-token-tw.dialog.ok": "Apply",
   "resize-token-tw.dialog.cancel": "Cancel",
-  "resize-token-tw.sizes.small": "Small (1x1)",
-  "resize-token-tw.sizes.medium": "Medium (2x2)",
-  "resize-token-tw.sizes.large": "Large (3x3)"
+  "resize-token-tw.sizes.tiny": "Tiny (0.25x0.25)",
+  "resize-token-tw.sizes.small": "Small (0.5x0.5)",
+  "resize-token-tw.sizes.medium": "Medium (1x1)",
+  "resize-token-tw.sizes.large": "Large (2x2)",
+  "resize-token-tw.sizes.huge": "Huge (3x3)"
 }
