@@ -23,7 +23,7 @@
   "url": "https://github.com/TioWidow/resize-token",
   "manifest": "https://raw.githubusercontent.com/TioWidow/resize-token/main/module.json",
   "download": "https://github.com/TioWidow/resize-token/archive/refs/heads/main.zip",
-  "license": "MIT",
+  "license": "GPL-3.0 (Non-Commercial)",
   "languages": [
   {
     "lang": "en",
