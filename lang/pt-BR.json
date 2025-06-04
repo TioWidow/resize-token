@@ -9,5 +9,11 @@
   "resize-token-tw.sizes.small": "Small (0.5x0.5)",
   "resize-token-tw.sizes.medium": "Medium (1x1)",
   "resize-token-tw.sizes.large": "Large (2x2)",
-  "resize-token-tw.sizes.huge": "Huge (3x3)"
+  "resize-token-tw.sizes.huge": "Huge (3x3)",
+  "resize-token-tw.settings.allowPlayers.name": "Permitir Resize Token para Jogadores",
+  "resize-token-tw.settings.allowPlayers.hint": "Se desabilitado, apenas o Mestre verá o botão de redimensionamento.",
+  "resize-token-tw.button.title": "Redimensionar Token",
+  "resize-token-tw.settings.allowImageURLForPlayers.name": "Permitir jogadores enviarem imagens por URL",
+  "resize-token-tw.settings.allowImageURLForPlayers.hint": "Se desmarcado, apenas o Mestre poderá colar imagens via URL no chat."
+
 }

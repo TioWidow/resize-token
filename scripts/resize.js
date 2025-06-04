@@ -8,15 +8,33 @@ const SIZES = [
   { id: "huge", labelKey: `${MODULE_ID}.sizes.huge`, scale: 3 }
 ];
 
+
+Hooks.once('init', () => {
+  game.settings.register('resize-token-tw', 'allowPlayers', {
+    name: 'resize-token-tw.settings.allowPlayers.name',
+    hint: 'resize-token-tw.settings.allowPlayers.hint',
+    scope: 'world',
+    config: true,
+    type: Boolean,
+    default: true
+  });
+});
+
+
+
+
 Hooks.on("renderTokenHUD", (app, htmlElement, data) => {
+  const allowPlayers = game.settings.get('resize-token-tw', 'allowPlayers');
+  const isGM = game.user.isGM;
+
+  // Se não permitir jogadores e não for GM, não adiciona o botão
+  if (!allowPlayers && !isGM) return;
+
   const html = $(htmlElement);
-
-  if (html.find(`.control-icon[data-action="${MODULE_ID}"]`).length > 0) return;
-
-  const tooltip = game.i18n.localize(`${MODULE_ID}.tooltip`);
+  if (html.find(`.control-icon[data-action="resize-token-tw"]`).length > 0) return;
 
   const button = $(`
-    <div class="control-icon" data-action="${MODULE_ID}" title="${tooltip}">
+    <div class="control-icon" data-action="resize-token-tw" title="${game.i18n.localize('resize-token-tw.button.title')}">
       <i class="fas fa-expand-arrows-alt"></i>
     </div>
   `);
@@ -30,6 +48,7 @@ Hooks.on("renderTokenHUD", (app, htmlElement, data) => {
     showResizeDialog(app.object);
   });
 });
+
 
 function showResizeDialog(token) {
   const options = SIZES.map(size =>

@@ -1,3 +1,18 @@
 .resize-token-btn:hover {
     background: rgba(0, 0, 0, 0.9);
 }
+.control-icon[data-action="resize-token-tw"] i {
+  vertical-align: middle;   /* Alinha verticalmente ao meio */
+  line-height: 1;           /* Ajusta a linha para evitar espaçamentos estranhos */
+  position: relative;
+  top: -2px;                /* Ajusta a posição vertical, altere o valor para subir ou descer */
+}
+/* Corrige o alinhamento apenas para o botão do módulo resize-token-tw */
+.placeable-hud .control-icon[data-action="resize-token-tw"] {
+  padding-top: 2px; /* Ou ajuste conforme necessário */
+  padding-bottom: 2px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

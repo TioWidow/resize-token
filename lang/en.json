@@ -9,5 +9,12 @@
   "resize-token-tw.sizes.small": "Small (0.5x0.5)",
   "resize-token-tw.sizes.medium": "Medium (1x1)",
   "resize-token-tw.sizes.large": "Large (2x2)",
-  "resize-token-tw.sizes.huge": "Huge (3x3)"
+  "resize-token-tw.sizes.huge": "Huge (3x3)",
+  "resize-token-tw.settings.allowPlayers.name": "Allow Resize Token for Players",
+  "resize-token-tw.settings.allowPlayers.hint": "If disabled, only the Game Master can see the resize button.",
+  "resize-token-tw.button.title": "Resize Token",
+  "resize-token-tw.settings.allowImageURLForPlayers.name": "Allow players to send images via URL",
+  "resize-token-tw.settings.allowImageURLForPlayers.hint": "If unchecked, only the GM can paste image URLs into chat."
+
+
 }
