@@ -15,8 +15,10 @@
     }
   ],
   "scripts": [
+    "scripts/config.js",
     "scripts/resize.js",
-    "scripts/url-to-image.js"],
+    "scripts/url-to-image.js"
+],
   "esmodules": [],
   "styles": ["styles/style.css"],
   "packs": [],

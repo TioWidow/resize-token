@@ -1,13 +1,16 @@
 # 🛠️ [TW] Toolkit
 
 A collection of quality-of-life tools for Foundry VTT, including quick token resizing and automatic conversion of image URLs in chat.
+My idea is to add some simple features to this module that need to be accessed fairly often. This is my first module for Foundry VTT, so feel free to share any feedback or report any issues!
 
-![Preview](https://raw.githubusercontent.com/TioWidow/tw-toolkit/main/assets/preview.png)
+- 🔍 **Resize Token**
+Adds a HUD button to resize tokens to common D&D sizes (Tiny, Small, Medium, Large, Huge) for GM or Players.
+![Preview](https://raw.githubusercontent.com/TioWidow/tw-toolkit/main/static/readme/resizetoken.gif)
 
-## ✨ Features
+- 🖼️ **URL to Image**: 
+Converts pasted image URLs in chat into rendered images automatically.
+![Preview](https://raw.githubusercontent.com/TioWidow/tw-toolkit/main/static/readme/url-to-image.gif)
 
-- 🔍 **Resize Token**: Adds a HUD button to resize tokens to common D&D sizes (Tiny, Small, Medium, Large, Huge).
-- 🖼️ **URL to Image**: Converts pasted image URLs in chat into rendered images automatically.
 - ⚙️ Settings to allow or restrict access to players or limit to GMs only.
 
 ## 🧰 Installation

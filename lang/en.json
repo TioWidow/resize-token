@@ -1,20 +1,24 @@
 {
-  "resize-token-tw.tooltip": "Resize Token",
-  "resize-token-tw.dialog.title": "Resize Token",
-  "resize-token-tw.dialog.content": "Choose the token size:",
-  "resize-token-tw.dialog.label": "Size:",
-  "resize-token-tw.dialog.ok": "Apply",
-  "resize-token-tw.dialog.cancel": "Cancel",
-  "resize-token-tw.sizes.tiny": "Tiny (0.25x0.25)",
-  "resize-token-tw.sizes.small": "Small (0.5x0.5)",
-  "resize-token-tw.sizes.medium": "Medium (1x1)",
-  "resize-token-tw.sizes.large": "Large (2x2)",
-  "resize-token-tw.sizes.huge": "Huge (3x3)",
-  "resize-token-tw.settings.allowPlayers.name": "Allow Resize Token for Players",
-  "resize-token-tw.settings.allowPlayers.hint": "If disabled, only the Game Master can see the resize button.",
-  "resize-token-tw.button.title": "Resize Token",
-  "resize-token-tw.settings.allowImageURLForPlayers.name": "Allow players to send images via URL",
-  "resize-token-tw.settings.allowImageURLForPlayers.hint": "If unchecked, only the GM can paste image URLs into chat."
+  "tw-toolkit.tooltip": "Resize Token",
+  "tw-toolkit.dialog.title": "Resize Token",
+  "tw-toolkit.dialog.content": "Choose the token size:",
+  "tw-toolkit.dialog.label": "Size:",
+  "tw-toolkit.dialog.ok": "Apply",
+  "tw-toolkit.dialog.cancel": "Cancel",
+  "tw-toolkit.sizes.tiny": "Tiny (0.25x0.25)",
+  "tw-toolkit.sizes.small": "Small (0.5x0.5)",
+  "tw-toolkit.sizes.medium": "Medium (1x1)",
+  "tw-toolkit.sizes.large": "Large (2x2)",
+  "tw-toolkit.sizes.huge": "Huge (3x3)",
+  "tw-toolkit.button.title": "Resize Token",
 
-
+  "tw-toolkit.settings.enableResizeToken.name": "Enable Resize Token",
+  "tw-toolkit.settings.enableResizeToken.hint": "Enable or disable the resize token feature.",
+  "tw-toolkit.settings.allowResizeTokenForPlayers.name": "Allow Resize Token for Players",
+  "tw-toolkit.settings.allowResizeTokenForPlayers.hint": "If disabled, only the GM can resize tokens.",
+  
+  "tw-toolkit.settings.enableUrlToImage.name": "Enable URL to Image",
+  "tw-toolkit.settings.enableUrlToImage.hint": "Allow URLs sent in chat to be converted into images.",
+  "tw-toolkit.settings.allowUrlImageForPlayers.name": "Allow Players to Use URL to Image",
+  "tw-toolkit.settings.allowUrlImageForPlayers.hint": "If disabled, only the GM can paste image URLs in chat."
 }

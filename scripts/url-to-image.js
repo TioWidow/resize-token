@@ -1,43 +1,33 @@
+Hooks.once("ready", () => {
+  console.log("✅ [URL-to-Image] Script iniciado");
 
-Hooks.once("init", () => {
- game.settings.register("resize-token-tw", "allowImageURLForPlayers", {
-  name: "resize-token-tw.settings.allowImageURLForPlayers.name",
-  hint: "resize-token-tw.settings.allowImageURLForPlayers.hint",
-  scope: "world",
-  config: true,
-  type: Boolean,
-  default: true
-});
-});
+  Hooks.on("chatMessage", (chatLog, message, chatData) => {
+    const user = game.users.get(chatData.user);
 
-console.log("✅ [URL-to-Image] Script iniciado");
+    const featureEnabled = game.settings.get(globalThis.MODULE_ID, "enableUrlToImage");
+    const allowPlayers = game.settings.get(globalThis.MODULE_ID, "allowUrlImageForPlayers");
+    const isGM = user?.isGM;
 
-Hooks.on("chatMessage", (chatLog, message, chatData) => {
-  const user = game.users.get(chatData.user);
+    if (!featureEnabled) return;
+    if (!allowPlayers && !isGM) return;
 
-  // Verifica permissão nas configurações
-  const allowPlayers = game.settings.get("resize-token-tw", "allowImageURLForPlayers");
-  const isGM = user?.isGM;
+    const imageUrlPattern = /(https?:\/\/[^\s]+\.(?:png|jpe?g|gif|webp|bmp))/gi;
 
-  if (!allowPlayers && !isGM) return; // Bloqueia se for jogador e não for permitido
+    if (!imageUrlPattern.test(message)) return;
 
-  // Regex para identificar URLs de imagem
-  const imageUrlPattern = /(https?:\/\/[^\s]+\.(?:png|jpe?g|gif|webp|bmp))/gi;
- 
-  const replaced = message.replace(imageUrlPattern, (url) => {
-    console.log("✅ [URL-to-Image] URL de imagem foi convertida para HTML");
-    return `<img src="${url}" style="max-width:300px; border:1px solid #333; border-radius:4px;">`;
-  });
-
-  // Se houve substituição, envia o HTML
-  if (replaced !== message) {
-    ChatMessage.create({
-      user: chatData.user,
-      content: replaced,
-      whisper: chatData.whisper,
-      blind: chatData.blind,
-      speaker: chatData.speaker
+    const replaced = message.replace(imageUrlPattern, (url) => {
+      return `<img src="${url}" style="max-width:300px; border:1px solid #333; border-radius:4px;">`;
     });
-    return false; // Cancela o envio original
-  }
+
+    if (replaced !== message) {
+      ChatMessage.create({
+        user: chatData.user,
+        content: replaced,
+        whisper: chatData.whisper,
+        blind: chatData.blind,
+        speaker: chatData.speaker
+      });
+      return false; // Cancela o envio original
+    }
+  });
 });
