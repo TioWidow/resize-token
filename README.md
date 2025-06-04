@@ -22,19 +22,10 @@ Or download manually from the [GitHub releases](https://github.com/TioWidow/tw-t
 - 🇺🇸 English
 - 🇧🇷 Português (Brasil)
 
-## ⚙️ Settings
-
-- **Allow Token Resizing for Players**  
-  Controls whether non-GMs can see and use the token resize HUD button.
-
-- **Allow Image URLs in Chat for Players**  
-  Determines if players can paste image URLs that render in chat.
-
-Accessible via *Game Settings > Module Settings > [TW] Toolkit*.
 
 ## 📦 Compatibility
 
-- Requires Foundry VTT `v10+`
+- Requires Foundry VTT `v13+`
 - Verified through `v13.342`
 
 ## 👤 Author
@@ -53,10 +44,3 @@ This project is licensed under the [GNU General Public License v3.0](https://www
 Please credit the author when using or modifying this module.
 
 ---
-
-## 🚧 Planned Features
-
-- Token lock/mirroring toggles
-- Chat formatting enhancements
-- Custom token presets
-- Quick effects/status application
