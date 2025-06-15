@@ -23,8 +23,8 @@
   "styles": ["styles/style.css"],
   "packs": [],
   "url": "https://github.com/TioWidow/tw-toolkit",
-  "manifest": "https://raw.githubusercontent.com/TioWidow/tw-toolkit/v1.0.1/module.json",
-  "download": "https://github.com/TioWidow/tw-toolkit/archive/refs/tags/v1.0.1.zip",
+  "manifest": "https://raw.githubusercontent.com/TioWidow/tw-toolkit/main/module.json",
+  "download": "https://github.com/TioWidow/tw-toolkit/releases/latest/download/tw-toolkit.zip",
   "license": "GPL-3.0 (Non-Commercial)",
   "languages": [
   {
