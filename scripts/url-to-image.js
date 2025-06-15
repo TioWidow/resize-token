@@ -1,33 +1,51 @@
-Hooks.once("ready", () => {
-  console.log("✅ [URL-to-Image] Script iniciado");
+console.log("✅ [TW Toolkit] Script de URL-to-Image iniciado");
 
-  Hooks.on("chatMessage", (chatLog, message, chatData) => {
-    const user = game.users.get(chatData.user);
+const MODULE_ID = "tw-toolkit";
 
-    const featureEnabled = game.settings.get(globalThis.MODULE_ID, "enableUrlToImage");
-    const allowPlayers = game.settings.get(globalThis.MODULE_ID, "allowUrlImageForPlayers");
-    const isGM = user?.isGM;
+Hooks.on("chatMessage", (chatLog, message, chatData) => {
+  const isEnabled = game.settings.get(MODULE_ID, "enableUrlToImage");
+  const allowPlayers = game.settings.get(MODULE_ID, "allowUrlImageForPlayers");
 
-    if (!featureEnabled) return;
-    if (!allowPlayers && !isGM) return;
+  if (!isEnabled) return;
+  if (!game.user.isGM && !allowPlayers) return;
 
-    const imageUrlPattern = /(https?:\/\/[^\s]+\.(?:png|jpe?g|gif|webp|bmp))/gi;
+  const url = extractImageUrl(message);
+  if (!url) return;
 
-    if (!imageUrlPattern.test(message)) return;
+  // Previne que o chat envie a mensagem padrão
+  handleImageMessage(url);
+  return false;
+});
 
-    const replaced = message.replace(imageUrlPattern, (url) => {
-      return `<img src="${url}" style="max-width:300px; border:1px solid #333; border-radius:4px;">`;
-    });
+function extractImageUrl(message) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const urls = message.match(urlRegex);
+  if (!urls) return null;
 
-    if (replaced !== message) {
-      ChatMessage.create({
-        user: chatData.user,
-        content: replaced,
-        whisper: chatData.whisper,
-        blind: chatData.blind,
-        speaker: chatData.speaker
-      });
-      return false; // Cancela o envio original
+  // Verifica apenas a primeira URL da mensagem
+  return urls[0];
+}
+
+function handleImageMessage(url) {
+  validateImageUrl(url).then(isValid => {
+    if (isValid) {
+      const html = `
+        <div class="url-to-image">
+          <img src="${url}" style="max-width: 100%; height: auto;">
+        </div>
+      `;
+      ChatMessage.create({ content: html });
+    } else {
+      ui.notifications.warn(game.i18n.format(`${MODULE_ID}.urlToImage.invalidUrl`, { url }));
     }
   });
-});
+}
+
+function validateImageUrl(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}

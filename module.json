@@ -2,8 +2,7 @@
   "id": "tw-toolkit",
   "title": "TW Toolkit",
   "description": "Easily convert URLs into images in chat and quickly resize tokens",
-  "version": "1.0.0",
-
+  "version": "1.1.2",
   "compatibility": {
     "minimum": 13.342,
     "verified": 13.342
@@ -23,8 +22,8 @@
   "styles": ["styles/style.css"],
   "packs": [],
   "url": "https://github.com/TioWidow/tw-toolkit",
-  "manifest": "https://raw.githubusercontent.com/TioWidow/tw-toolkit/v1.1.0/module.json",
-  "download": "https://github.com/TioWidow/tw-toolkit/archive/refs/tags/v1.1.0.zip",
+  "manifest": "https://raw.githubusercontent.com/TioWidow/tw-toolkit/v1.1.2/module.json",
+  "download": "https://github.com/TioWidow/tw-toolkit/archive/refs/tags/v1.1.2.zip",
   "license": "GPL-3.0 (Non-Commercial)",
   "languages": [
   {
